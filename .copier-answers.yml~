@@ -13,7 +13,6 @@ license: apache
 loaders:
   - module
   - state
-  - utils
 max_salt_version: '3007'
 no_saltext_namespace: true
 os_support:

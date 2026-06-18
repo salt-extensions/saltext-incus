@@ -9,4 +9,4 @@ _____________
 .. autosummary::
     :toctree:
 
-    incus_mod
+    incus

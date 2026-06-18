@@ -9,6 +9,7 @@ Salt Extension for interacting with Incus
   :hidden:
 
   topics/installation
+  topics/usage
 
 .. toctree::
   :maxdepth: 2
@@ -17,6 +18,13 @@ Salt Extension for interacting with Incus
 
   ref/modules/index
   ref/states/index
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Utils
+  :hidden:
+
+  ref/utils/index
 
 .. toctree::
   :maxdepth: 2
