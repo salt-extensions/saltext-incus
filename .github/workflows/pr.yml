@@ -1,0 +1,23 @@
+---
+name: Pull Request
+
+on:
+  pull_request:
+
+jobs:
+  call_central_workflow:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: read
+
+  set_resolution:
+    # This step is just so we can make github require this step, to pass checks
+    # on a pull request instead of requiring all
+    name: Set the CI Pipeline Exit Status
+    if: always()
+    needs:
+      - call_central_workflow
+    uses: ./.github/workflows/set-resolution-action.yml

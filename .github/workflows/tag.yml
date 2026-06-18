@@ -1,0 +1,83 @@
+# Creates a new release.
+# Triggered by pushing a tag beginning with `v`.
+# The resulting version is taken from the tag.
+# Fails if any news fragments are left over or the inferred version does not match the topmost changelog entry.
+#
+# Alternative to releasing by merging the autorelease PR.
+---
+name: Tagged Releases
+
+on:
+  push:
+    tags:
+      - "v*"  # Only tags starting with "v" for "v1.0.0", etc.
+
+jobs:
+  get_version_tag:
+    name: Extract version from tag
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.get_version_tag.outputs.version }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd  # v6.0.2
+
+      - name: Extract version from tag name
+        id: get_version_tag
+        run: echo "version=${GITHUB_REF#refs/tags/v}" >> "$GITHUB_OUTPUT"
+
+      - name: Ensure changelog was rendered
+        env:
+          VERSION: ${{ steps.get_version_tag.outputs.version }}
+        run: |
+          test "$VERSION" = "$(python tools/version.py)" && \
+          test -z "$(find changelog -type f -not -name '.*' -print -quit)"
+
+      - name: Write version file
+        env:
+          VERSION: ${{ steps.get_version_tag.outputs.version }}
+        run: echo -n "$VERSION" > "$RUNNER_TEMP/version.txt"
+
+      - name: Upload version
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f  # v7.0.0
+        with:
+          archive: false
+          path: ${{ runner.temp }}/version.txt
+
+  close_autopr_on_tag:
+    name: Close release PR on manual tag
+    runs-on: ubuntu-24.04
+    needs:
+      - get_version_tag
+
+    steps:
+      - name: Find Pull Request
+        uses: juliangruber/find-pull-request-action@2956f830b67a9c78c392f00c69404edc4e497d30  # v1.11.0
+        id: find-pull-request
+        with:
+          branch: release/auto
+          base: ${{ github.event.repository.default_branch }}
+          state: open
+
+      - name: Close release PR
+        if: steps.find-pull-request.outputs.number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr close \
+            --comment "This release was triggered manually as v${{ needs.get_version_tag.outputs.version }}" \
+            --delete-branch \
+            --repo "$GITHUB_REPOSITORY" \
+            "${{ steps.find-pull-request.outputs.number }}"
+
+  call_central_workflow:
+    needs:
+      - get_version_tag
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: read
+
+  # Further jobs are run separately on `workflow_run` in deploy-package-action.yml

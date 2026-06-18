@@ -1,0 +1,45 @@
+---
+name: CI
+
+on:
+  workflow_call:
+
+jobs:
+  get-changed-files:
+    name: Get Changed Files
+    uses: ./.github/workflows/get-changed-files.yml
+    permissions:
+      contents: read
+      pull-requests: read  # for dorny/paths-filter to read pull requests
+
+  pre-commit:
+    name: Pre-Commit
+    needs:
+      - get-changed-files
+    uses: ./.github/workflows/pre-commit-action.yml
+    with:
+      changed-files: ${{ needs.get-changed-files.outputs.changed-files }}
+    permissions:
+      contents: read
+
+  test:
+    name: Test
+    needs:
+      - pre-commit
+    uses: ./.github/workflows/test-action.yml
+
+  docs:
+    name: Docs
+    needs:
+      - pre-commit
+    uses: ./.github/workflows/docs-action.yml
+    permissions:
+      contents: read
+
+  build-python-package:
+    name: Python Package
+    needs:
+      - pre-commit
+    uses: ./.github/workflows/package-action.yml
+    permissions:
+      contents: read

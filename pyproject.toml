@@ -1,0 +1,195 @@
+[build-system]
+requires = [
+    "wheel",
+    "setuptools>=50.3.2",
+    "setuptools_scm[toml]>=3.4",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "src/incus/version.py"
+write_to_template = "__version__ = \"{version}\"\n"
+
+[project]
+name = "incus"
+description = "Salt Extension for interacting with Incus"
+authors = [
+    {name = "Will Sinatra", email = "durrendal@lambdacreate.com"},
+]
+keywords = [
+    "salt-extension",
+]
+license = {text = "Apache Software License"}
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Cython",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+]
+requires-python = ">= 3.10"
+dynamic = ["version"]
+dependencies = [
+    "salt>=3007",
+]
+
+[project.readme]
+file = "README.md"
+content-type = "text/markdown"
+
+[project.urls]
+Homepage = "https://github.com/salt-extensions/saltext-incus"
+Documentation = "https://salt-extensions.github.io/saltext-incus/"
+Source = "https://github.com/salt-extensions/saltext-incus"
+Tracker = "https://github.com/salt-extensions/saltext-incus/issues"
+
+[project.optional-dependencies]
+changelog = ["towncrier==25.8.0"]
+dev = [
+    "nox[uv]>=2024.3,!=2025.05.01",
+    "pre-commit>=2.21.0",
+]
+# These dependencies are used in automations. It can be helpful
+# to have them installed in the dev venv, e.g. for editor integration.
+# When initializing the dev env using the included automation, pass
+# `--extras` to install them automatically.
+dev_extra = [
+    "black==26.3.1",
+    "isort==8.0.1",
+    "coverage==7.13.4",
+]
+docs = [
+  "sphinx",
+  "sphinx-prompt",
+  "sphinxcontrib-spelling",
+  "sphinx-copybutton",
+  "towncrier==25.8.0",
+  "sphinxcontrib-towncrier",
+  "myst_parser",
+  "furo",
+  "sphinx-inline-tabs",
+]
+docsauto = ["sphinx-autobuild"]
+lint = [
+    "pylint==4.0.4",
+]
+tests = [
+    "pytest>=7.2.0",
+    "pytest-salt-factories>=1.0.0; sys_platform == 'win32'",
+    "pytest-salt-factories[docker]>=1.0.0; sys_platform != 'win32'",
+    "pytest-instafail",
+]
+
+[project.entry-points."salt.loader"]
+"incus" = "incus"
+
+[tool.uv]
+# Salt's legacy setup.py requires old setuptools.
+# Since uv 0.6.0, it does not fall back to reading requirements from egg-info.
+build-constraint-dependencies = ["setuptools<69"]
+
+[tool.setuptools]
+zip-safe = false
+include-package-data = true
+platforms = ["any"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+exclude = ["tests"]
+
+[tool.distutils.bdist_wheel]
+# Use this option if your package is pure-python
+universal = 1
+
+[tool.distutils.sdist]
+owner = "root"
+group = "root"
+
+[tool.build_sphinx]
+source_dir = "docs"
+build_dir = "build/sphinx"
+
+[tool.black]
+line-length = 100
+
+[tool.isort]
+force_single_line = true
+skip = ["src/incus/__init__.py"]
+profile = "black"
+line_length = 100
+
+[tool.towncrier]
+package = "incus"
+filename = "CHANGELOG.md"
+template = "changelog/.template.jinja"
+directory = "changelog/"
+start_string = "# Changelog\n"
+underlines = ["", "", ""]
+title_format = "## {version} ({project_date})"
+issue_format = "[#{issue}](https://github.com/salt-extensions/saltext-incus/issues/{issue})"
+
+[[tool.towncrier.type]]
+directory = "breaking"
+name = "Breaking changes"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "removed"
+name = "Removed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "deprecated"
+name = "Deprecated"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "security"
+name = "Security"
+showcontent = true
+
+# While we currently don't use ruff for linting, it's helpful to include
+# these settings in case a user has setup ruff in their editor environment.
+[tool.ruff]
+builtins = [
+    "__opts__",
+    "__salt__",
+    "__pillar__",
+    "__grains__",
+    "__context__",
+    "__runner__",
+    "__ret__",
+    "__env__",
+    "__low__",
+    "__states__",
+    "__lowstate__",
+    "__running__",
+    "__active_provider_name__",
+    "__master_opts__",
+    "__jid_event__",
+    "__instance_id__",
+    "__salt_system_encoding__",
+    "__proxy__",
+    "__serializers__",
+    "__reg__",
+    "__executors__",
+    "__events__",
+]
