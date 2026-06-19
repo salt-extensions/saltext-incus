@@ -134,3 +134,4 @@ src/incus/version.py
 
 # Ignore CI generated artifacts
 artifacts/
+*~

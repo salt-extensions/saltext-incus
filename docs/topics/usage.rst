@@ -438,11 +438,3 @@ lives under ``/run/salt.incus.<random>`` and is owned by root with mode 0700.
 
 If the instance already has Salt installed and you want to use it instead of
 shipping the thin, pass ``transport: baked``.
-
-Security notes
---------------
-
-This was built for a hostile-tenant model. Pillar is never placed on the command
-line, in-instance staging is a root-only tmpfs directory removed on every exit,
-and the thin is shipped per run rather than left resident. See
-``IMPLEMENTATION_NOTES.md`` for the full model.
