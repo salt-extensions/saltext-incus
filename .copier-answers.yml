@@ -15,7 +15,7 @@ loaders:
   - state
   - utils
 max_salt_version: '3007'
-no_saltext_namespace: true
+no_saltext_namespace: false
 os_support:
   - Linux
 package_name: incus
