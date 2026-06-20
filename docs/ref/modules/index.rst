@@ -4,7 +4,7 @@ _________________
 Execution Modules
 _________________
 
-.. currentmodule:: incus.modules
+.. currentmodule:: saltext.incus.modules
 
 .. autosummary::
     :toctree:

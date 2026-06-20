@@ -4,7 +4,7 @@ _________
 Utilities
 _________
 
-.. currentmodule:: incus.utils
+.. currentmodule:: saltext.incus.utils
 
 .. autosummary::
     :toctree:

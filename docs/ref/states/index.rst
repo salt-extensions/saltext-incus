@@ -4,7 +4,7 @@ _____________
 State Modules
 _____________
 
-.. currentmodule:: incus.states
+.. currentmodule:: saltext.incus.states
 
 .. autosummary::
     :toctree:
