@@ -7,7 +7,8 @@ try:
 except ImportError:  # pragma: no cover
     __version__ = "0.0.0.not-installed"
     try:
-        from importlib.metadata import version, PackageNotFoundError
+        from importlib.metadata import PackageNotFoundError
+        from importlib.metadata import version
 
         try:
             __version__ = version(__name__)
@@ -16,7 +17,8 @@ except ImportError:  # pragma: no cover
             pass
     except ImportError:
         try:
-            from pkg_resources import get_distribution, DistributionNotFound
+            from pkg_resources import DistributionNotFound
+            from pkg_resources import get_distribution
 
             try:
                 __version__ = get_distribution(__name__).version

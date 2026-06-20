@@ -18,8 +18,8 @@ import salt.config
 from salt.exceptions import CommandExecutionError
 from salt.exceptions import SaltInvocationError
 
-from incus.modules import incus
-from incus.utils import incus as incus_seam
+from saltext.incus.modules import incus
+from saltext.incus.utils import incus as incus_seam
 
 PASS_HS = {"file_|-x_|-/x_|-managed": {"result": True, "changes": {}, "comment": "ok"}}
 FAIL_HS = {"file_|-x_|-/x_|-managed": {"result": False, "changes": {}, "comment": "no"}}

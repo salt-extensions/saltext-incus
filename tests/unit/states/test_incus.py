@@ -12,7 +12,7 @@ from unittest.mock import MagicMock
 import pytest
 from salt.exceptions import CommandExecutionError
 
-import incus.states.incus as incus_states
+import saltext.incus.states.incus as incus_states
 
 
 @pytest.fixture

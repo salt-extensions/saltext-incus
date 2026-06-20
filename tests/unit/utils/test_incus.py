@@ -14,7 +14,7 @@ from unittest.mock import MagicMock
 import pytest
 from salt.exceptions import CommandExecutionError
 
-import incus.utils.incus as incus_utils
+import saltext.incus.utils.incus as incus_utils
 
 
 def _completed(retcode=0, stdout="", stderr=""):

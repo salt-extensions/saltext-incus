@@ -4,7 +4,7 @@ import os
 import pytest
 from saltfactories.utils import random_string
 
-from incus import PACKAGE_ROOT
+from saltext.incus import PACKAGE_ROOT
 
 # Reset the root logger to its default level(because salt changed it)
 logging.root.setLevel(logging.WARNING)
