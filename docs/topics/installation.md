@@ -6,19 +6,19 @@ Generally, extensions need to be installed into the same Python environment Salt
 ```yaml
 Install Salt Incus extension:
   pip.installed:
-    - name: incus
+    - name: saltext.incus
 ```
 :::
 
 :::{tab} Onedir installation
 ```bash
-salt-pip install incus
+salt-pip install saltext.incus
 ```
 :::
 
 :::{tab} Regular installation
 ```bash
-pip install incus
+pip install saltext.incus
 ```
 :::
 

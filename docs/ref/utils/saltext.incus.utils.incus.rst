@@ -1,5 +1,5 @@
-incus.utils.incus
-=================
+saltext.incus.utils.incus
+=========================
 
 .. automodule:: saltext.incus.utils.incus
     :members:

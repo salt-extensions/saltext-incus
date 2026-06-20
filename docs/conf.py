@@ -37,7 +37,7 @@ addtl_paths = (
 for addtl_path in addtl_paths:
     sys.path.insert(0, os.path.abspath(os.path.join(docs_basepath, addtl_path)))
 
-dist = distribution("incus")
+dist = distribution("saltext.incus")
 
 
 # -- Project information -----------------------------------------------------

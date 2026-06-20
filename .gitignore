@@ -130,7 +130,7 @@ dmypy.json
 .pyre/
 
 # Ignore the setuptools_scm auto-generated version module
-src/incus/version.py
+src/saltext/incus/version.py
 
 # Ignore CI generated artifacts
 artifacts/

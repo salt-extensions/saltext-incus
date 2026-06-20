@@ -29,7 +29,7 @@ To get started contributing, first clone this repository (or your fork):
 git clone --origin upstream git@github.com:salt-extensions/saltext-incus.git
 
 # Change to the repo dir
-cd incus
+cd saltext-incus
 ```
 
 #### Automatic

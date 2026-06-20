@@ -11,7 +11,7 @@ write_to = "src/saltext/incus/version.py"
 write_to_template = "__version__ = \"{version}\"\n"
 
 [project]
-name = "incus"
+name = "saltext.incus"
 description = "Salt Extension for interacting with Incus"
 authors = [
     {name = "Will Sinatra", email = "durrendal@lambdacreate.com"},
@@ -84,7 +84,7 @@ tests = [
 ]
 
 [project.entry-points."salt.loader"]
-"incus" = "incus"
+"saltext.incus" = "saltext.incus"
 
 [tool.uv]
 # Salt's legacy setup.py requires old setuptools.
@@ -122,7 +122,7 @@ profile = "black"
 line_length = 100
 
 [tool.towncrier]
-package = "incus"
+package = "saltext.incus"
 filename = "CHANGELOG.md"
 template = "changelog/.template.jinja"
 directory = "changelog/"

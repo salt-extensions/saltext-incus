@@ -70,7 +70,7 @@ def _seam():
     """
     try:
         # pylint: disable-next=import-outside-toplevel
-        from incus.utils import incus as _incus
+        from saltext.incus.utils import incus as _incus
     except ImportError:
         return _UtilsProxy(globals().get("__utils__") or {})
     return _incus

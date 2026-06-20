@@ -38,7 +38,7 @@ ignore_errors = True
 
 [paths]
 source =
-  incus
-  src/incus
+  src/saltext/incus
+  **/saltext/incus
 testsuite =
   tests/

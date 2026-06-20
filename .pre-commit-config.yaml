@@ -25,7 +25,7 @@ repos:
         name: Check CLI examples on execution modules
         entry: python .pre-commit-hooks/check-cli-examples.py
         language: python
-        files: ^src/incus/modules/.*\.py$
+        files: ^src/saltext/incus/modules/.*\.py$
 
   - repo: local
     hooks:
@@ -42,7 +42,7 @@ repos:
       - id: salt-rewrite
         alias: rewrite-docstrings
         name: Salt extensions docstrings auto-fixes
-        files: ^src/incus/.*\.py$
+        files: ^src/saltext/incus/.*\.py$
         args: [--silent]
 
   - repo: https://github.com/saltstack/salt-rewrite
@@ -63,7 +63,7 @@ repos:
         args: [
           --py310-plus,
         ]
-        exclude: src/incus/version.py
+        exclude: src/saltext/incus/version.py
 
   - repo: https://github.com/PyCQA/isort
     rev: a333737ed43df02b18e6c95477ea1b285b3de15a  # 8.0.1
@@ -72,21 +72,21 @@ repos:
         args: [
           --py 310,
         ]
-        exclude: src/incus/(__init__|version).py
+        exclude: src/saltext/incus/(__init__|version).py
 
   - repo: https://github.com/psf/black
     rev: c6755bb741b6481d6b3d3bb563c83fa060db96c9  # 26.3.1
     hooks:
       - id: black
         args: [-l 100]
-        exclude: src/incus/version.py
+        exclude: src/saltext/incus/version.py
 
   - repo: https://github.com/adamchainz/blacken-docs
     rev: dda8db18cfc68df532abf33b185ecd12d5b7b326  # 1.20.0
     hooks:
       - id: blacken-docs
         args: [--skip-errors]
-        files: ^(docs/.*\.rst|src/incus/.*\.py)$
+        files: ^(docs/.*\.rst|src/saltext/incus/.*\.py)$
         additional_dependencies:
           - black==26.3.1
   # <---- Formatting -----------------------------------------------------------------------------
@@ -99,7 +99,7 @@ repos:
         alias: bandit-salt
         name: Run bandit against the code base
         args: [--silent, -lll, --skip, B701]
-        exclude: src/incus/version.py
+        exclude: src/saltext/incus/version.py
 
   - repo: https://github.com/PyCQA/bandit
     rev: 92ae8b82fb422a639f0ed8d99e96cea769594e08  # 1.9.4

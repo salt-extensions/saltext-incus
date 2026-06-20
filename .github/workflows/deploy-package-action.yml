@@ -88,7 +88,7 @@ jobs:
       id-token: write
     environment:
       name: release
-      url: https://pypi.org/p/incus
+      url: https://pypi.org/p/saltext.incus
 
     steps:
       - name: Download Python Package Artifacts
