@@ -7,7 +7,7 @@ requires = [
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-write_to = "src/incus/version.py"
+write_to = "src/saltext/incus/version.py"
 write_to_template = "__version__ = \"{version}\"\n"
 
 [project]
@@ -117,7 +117,7 @@ line-length = 100
 
 [tool.isort]
 force_single_line = true
-skip = ["src/incus/__init__.py"]
+skip = ["src/saltext/incus/__init__.py"]
 profile = "black"
 line_length = 100
 
